@@ -35,7 +35,7 @@ library(kableExtra)
 # Step 2: check original CSV for errors as it could mess up the program; it may be easier to spot errors in Excel format so you can also download an that file to look.
 # Step 3: read in CSV data.
 
-data <- read_csv("data/FRN_Collection_Form_February_25_2025.csv")
+data <- read_csv("data/FRN_Collection_Form_March_3_2025.csv")
 
 # Step 4: update column prefixes if the Qualtrics form has been changed. If adding another column between 13-19, you must add an underscore right after the hall name.
 
@@ -156,19 +156,19 @@ work_data <- tidy_data
 work_data$date <- mdy(work_data$date)
 
 work_data_filtered <-  work_data |>
-  filter(date >= mdy('02-17-2025')) |>
-  filter(date <= mdy('02-23-2025'))
+  filter(date >= mdy('02-24-2025')) |>
+  filter(date <= mdy('03-02-2025'))
 
 week_weight <- work_data_filtered |>
   summarize(total_weight = sum(weight, na.rm = TRUE))
 
 work_data <- clean_data
-work_data$date <- mdy(work_data_cont$date)
-work_data$containers <- as.numeric(work_data_cont$containers)
+work_data$date <- mdy(work_data$date)
+work_data$containers <- as.numeric(work_data$containers)
 
 work_data <- work_data |>
-  filter(date >= mdy('02-17-2025')) |>
-  filter(date <= mdy('02-23-2025'))
+  filter(date >= mdy('02-24-2025')) |>
+  filter(date <= mdy('03-02-2025'))
 
 weekly_containers <- work_data |>
   summarize(num_containers = sum(containers, na.rm = TRUE))
@@ -176,6 +176,17 @@ weekly_containers <- work_data |>
 num_pickups <- work_data |>
   filter(containers > 0) |>
   summarize(count = n())
+
+
+spring_filter <- tidy_data 
+spring_filter$date <- mdy(spring_filter$date)
+
+spring_filter <- spring_filter |>
+  filter(date >= mdy('02-10-2025')) |>
+  filter(date <= mdy('03-03-2025'))
+
+spring_weight <- spring_filter |>
+  summarize(total_weight = sum(weight, na.rm = TRUE))
 
 ```
 
