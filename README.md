@@ -1,3 +1,2 @@
-# Food-Rescue-Network
-
+# foodrescue
 This repository is a place where any data analysis related to the Food Rescue Network can be housed. It was started so that we can streamline the data collection and analysis process and make sure that our code is reproducible for data analysts to use after us. Please store semesterly reports here, as well as any other related work. This is meant to be a collaborative space that can be passed down after data analysts leave their roles or graduate.
