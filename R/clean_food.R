@@ -7,9 +7,10 @@
 #'  \item{tidy_data}{}
 #' }
 #' @importFrom tidyr separate_rows pivot_longer
-#' @importFrom dplyr filter select rename mutate rename_with case_when
+#' @importFrom dplyr filter select rename mutate rename_with case_when if_else
 #' @importFrom stringr str_replace str_replace_all
 #' @importFrom purrr map flatten_chr
+#' @importFrom lubridate mdy
 #' @export
 #'
 #' @examples
@@ -25,7 +26,7 @@ clean_food <- function(data) {
   # Preliminary cleaning
   clean_data <- data |>
     filter(Status == "IP Address") |>
-    select(-c(StartDate, EndDate, Progress, RecipientLastName, RecipientFirstName, RecipientEmail, ExternalReference, LocationLatitude, LocationLongitude, DistributionChannel, UserLanguage, Progress, Finished, `Duration (in seconds)`, IPAddress, ResponseId, Status, RecordedDate)) |>
+    dplyr::select(-c(StartDate, EndDate, Progress, RecipientLastName, RecipientFirstName, RecipientEmail, ExternalReference, LocationLatitude, LocationLongitude, DistributionChannel, UserLanguage, Progress, Finished, `Duration (in seconds)`, IPAddress, ResponseId, Status, RecordedDate)) |>
     separate_rows(Q2, sep = ",") |>
     rename(dining_hall = Q2) |>
     rename(date = Q1)
@@ -111,8 +112,22 @@ clean_food <- function(data) {
                  names_to = "type",
                  values_to = "weight",
                  values_drop_na = TRUE) |>
-    select(c(date, dining_hall, type, weight)) |>
+    dplyr::select(c(date, dining_hall, type, weight)) |>
     mutate(weight = as.numeric(weight))
+
+  # Formatting data
+  tidy_data$date <- mdy(tidy_data$date)
+  clean_data$date <- mdy(clean_data$date)
+  clean_data$containers <- as.numeric(clean_data$containers)
+
+  # Subtract 2 lbs starting January 1st, 2025
+  tidy_data <- tidy_data |>
+    mutate(weight = if_else(
+      date >= mdy('01-01-2025') & !dining_hall %in% c("Campus Center Cafe", "Compass Cafe"),
+      weight - 2,
+      weight
+    ))
 
   return(list(clean_data = clean_data, tidy_data = tidy_data))
 }
+
