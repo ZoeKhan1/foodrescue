@@ -4,7 +4,7 @@
 \alias{weekly_stats}
 \title{Function to clean raw FRN survey data}
 \usage{
-weekly_stats(clean_data, tidy_data, start, end)
+weekly_stats(clean_data, tidy_data, start, end, location)
 }
 \arguments{
 \item{clean_data}{cleaned data from clean_food}
@@ -14,6 +14,8 @@ weekly_stats(clean_data, tidy_data, start, end)
 \item{start}{start date}
 
 \item{end}{end date}
+
+\item{location}{specified dining hall(s)}
 }
 \value{
 A list with three values: weekly summed weight (lb), # containers, # pick-ups

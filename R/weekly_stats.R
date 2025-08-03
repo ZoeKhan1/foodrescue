@@ -4,9 +4,11 @@
 #' @param tidy_data tidy data from clean_food
 #' @param start start date
 #' @param end end date
+#' @param location specified dining hall(s)
 #' @return A list with three values: weekly summed weight (lb), # containers, # pick-ups
 #' @importFrom lubridate mdy
 #' @importFrom dplyr filter summarize
+#' @importFrom knitr kable
 #' @export
 #'
 #' @examples
@@ -18,20 +20,18 @@
 #' # Call function
 #' weekly_stats(cooked_food[["clean_data"]], cooked_food[["tidy_data"]], '10-1-2024', '10-7-2024')
 #' }
-weekly_stats <- function(clean_data, tidy_data, start, end) {
-  # Formatting data
-  tidy_data$date <- mdy(tidy_data$date)
-  clean_data$date <- mdy(clean_data$date)
-  clean_data$containers <- as.numeric(clean_data$containers)
+weekly_stats <- function(clean_data, tidy_data, start, end, location) {
 
-  # Filtering to specified week
+  # Filtering to specified week and location
   tidy_filtered <- tidy_data |>
     filter(date >= mdy(start)) |>
-    filter(date <= mdy(end))
+    filter(date <= mdy(end)) |>
+    filter(dining_hall %in% location)
 
   clean_filtered <- clean_data |>
     filter(date >= mdy(start)) |>
-    filter(date <= mdy(end))
+    filter(date <= mdy(end)) |>
+    filter(dining_hall %in% location)
 
   # Getting number of containers
   containers <- clean_filtered |>
@@ -45,19 +45,16 @@ weekly_stats <- function(clean_data, tidy_data, start, end) {
     summarize(count = n())
 
   # Getting weekly weight
-  if (mdy(start) > mdy("01-01-2025")) {
-    dining_halls <- tidy_filtered |>
-      filter(!dining_hall %in% c("Campus Center Cafe", "Compass Cafe")) |>
-      summarize(total_weight = sum(weight, na.rm = TRUE) - containers*2)
-  } else {
-    dining_halls <- tidy_filtered |>
-      filter(!dining_hall %in% c("Campus Center Cafe", "Compass Cafe")) |>
-      summarize(total_weight = sum(weight, na.rm = TRUE))
-  }
-  cafes <- tidy_filtered |>
-    filter(dining_hall == "Campus Center Cafe" | dining_hall == "Compass Cafe") |>
+  weight <- tidy_filtered |>
     summarize(total_weight = sum(weight, na.rm = TRUE))
-  weight <- dining_halls + cafes
 
-  return(list(weight = weight, containers = containers, pickups = pickups))
+  # Consolidation
+  stats <- data.frame(
+    Weight = weight,
+    Containers = containers,
+    Pickups = pickups
+  ) |>
+    kable(col.names = c("Weight", "Containers", "Pick-ups"))
+
+  return(stats)
 }
