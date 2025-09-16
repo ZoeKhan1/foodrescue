@@ -11,6 +11,7 @@
 #' @importFrom stringr str_replace str_replace_all
 #' @importFrom purrr map flatten_chr
 #' @importFrom lubridate mdy
+#' @importFrom rlang sym
 #' @export
 #'
 #' @examples

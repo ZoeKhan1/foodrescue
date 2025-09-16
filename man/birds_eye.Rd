@@ -25,9 +25,10 @@ Function to make interactive plot
 \dontrun{
 # Get data
 data("raw_food")
-cooked_food <- clean_food(raw_food)
+df <- clean_food(raw_food)
+tidy_data <- df[['tidy_data']]
 
 # Call function
-birds_eye(cooked_food[['tidy_data']], min(tidy_data$date), max(tidy_data$date), c("Tyler", "Comstock", "Cutter Ziskind", "Compass Cafe"))
+birds_eye(tidy_data, min(tidy_data$date), max(tidy_data$date), c("Tyler", "Comstock", "Cutter Ziskind", "Compass Cafe"))
 }
 }

@@ -17,7 +17,9 @@ Imports:
     knitr,
     forcats,
     ggplot2,
-    plotly
+    plotly,
+    rlang,
+    kableExtra
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)

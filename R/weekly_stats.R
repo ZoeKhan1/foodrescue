@@ -7,7 +7,7 @@
 #' @param location specified dining hall(s)
 #' @return A list with three values: weekly summed weight (lb), # containers, # pick-ups
 #' @importFrom lubridate mdy
-#' @importFrom dplyr filter summarize
+#' @importFrom dplyr filter summarize n
 #' @importFrom knitr kable
 #' @export
 #'
@@ -15,10 +15,12 @@
 #' \dontrun{
 #' # Get data
 #' data("raw_food")
-#' cooked_food <- clean_food(raw_food)
+#' df <- clean_food(raw_food)
+#' tidy_data <- df[['tidy_data']]
+#' clean_data <- df[['clean_data']]
 #'
 #' # Call function
-#' weekly_stats(cooked_food[["clean_data"]], cooked_food[["tidy_data"]], '10-1-2024', '10-7-2024')
+#' weekly_stats(clean_data, tidy_data, '10-1-2024', '11-1-2024', "Tyler")
 #' }
 weekly_stats <- function(clean_data, tidy_data, start, end, location) {
 

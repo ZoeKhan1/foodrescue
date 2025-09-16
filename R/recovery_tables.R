@@ -10,16 +10,19 @@
 #' @importFrom dplyr filter summarize arrange group_by
 #' @importFrom knitr kable
 #' @importFrom utils head
+#' @importFrom kableExtra row_spec
 #' @export
 #'
 #' @examples
 #' \dontrun{
 #' # Get data
 #' data("raw_food")
-#' cooked_food <- clean_food(raw_food)
+#' df <- clean_food(raw_food)
+#' tidy_data <- df[['tidy_data']]
 #'
 #' # Call function
-#' recovery_tables(cooked_food[['tidy_data']], '10-01-2024', '12-01-2024', "Tyler", "total")
+#' recovery_tables(tidy_data, '10-01-2024', '12-01-2024', "Tyler", "total")
+#' recovery_tables(tidy_data, '10-01-2024', '12-01-2024', "Tyler", "type")
 #' }
 recovery_tables <- function(tidy_data, start, end, location, option = c("total", "type", "hall", "top")) {
   if (length(location) == 1 & option %in% c("hall", "top")) {

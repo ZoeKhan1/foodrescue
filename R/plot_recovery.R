@@ -7,20 +7,21 @@
 #' @param fill option to fill with food type if multiple locations are selected
 #' @return A ggplot object
 #' @importFrom lubridate mdy
-#' @importFrom dplyr filter mutate
-#' @importFrom forcats fct_reorder
-#' @importFrom ggplot2 ggplot aes labs geom_col scale_fill_viridis_d theme_bw theme
+#' @importFrom dplyr filter mutate desc
+#' @importFrom forcats fct_reorder fct_rev
+#' @importFrom ggplot2 ggplot aes labs geom_col scale_fill_viridis_d theme_bw theme element_blank element_text
 #' @export
 #'
 #' @examples
 #' \dontrun{
 #' # Get data
 #' data("raw_food")
-#' cooked_food <- clean_food(raw_food)
+#' df <- clean_food(raw_food)
+#' tidy_data <- df[['tidy_data']]
 #'
 #' # Call function
-#' plot_recovery(cooked_food, '10-1-2024', '11-01-2024', "Tyler")
-#' plot_recovery(cooked_food, '10-1-2024', '11-01-2024', c("Tyler", "Comstock"), fill = TRUE)
+#' plot_recovery(tidy_data, '10-1-2024', '11-01-2024', "Tyler")
+#' plot_recovery(tidy_data, '10-1-2024', '11-01-2024', c("Tyler", "Comstock"), fill = TRUE)
 #' }
 plot_recovery <- function(tidy_data, start, end, location, fill = FALSE) {
   tidy_data <- tidy_data |>

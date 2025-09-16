@@ -27,9 +27,11 @@ Function to clean raw FRN survey data
 \dontrun{
 # Get data
 data("raw_food")
-cooked_food <- clean_food(raw_food)
+df <- clean_food(raw_food)
+tidy_data <- df[['tidy_data']]
+clean_data <- df[['clean_data']]
 
 # Call function
-weekly_stats(cooked_food[["clean_data"]], cooked_food[["tidy_data"]], '10-1-2024', '10-7-2024')
+weekly_stats(clean_data, tidy_data, '10-1-2024', '11-1-2024', "Tyler")
 }
 }

@@ -27,10 +27,11 @@ Function to plot recovery
 \dontrun{
 # Get data
 data("raw_food")
-cooked_food <- clean_food(raw_food)
+df <- clean_food(raw_food)
+tidy_data <- df[['tidy_data']]
 
 # Call function
-plot_recovery(cooked_food, '10-1-2024', '11-01-2024', "Tyler")
-plot_recovery(cooked_food, '10-1-2024', '11-01-2024', c("Tyler", "Comstock"), fill = TRUE)
+plot_recovery(tidy_data, '10-1-2024', '11-01-2024', "Tyler")
+plot_recovery(tidy_data, '10-1-2024', '11-01-2024', c("Tyler", "Comstock"), fill = TRUE)
 }
 }
