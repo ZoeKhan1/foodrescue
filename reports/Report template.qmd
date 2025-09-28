@@ -1,0 +1,115 @@
+---
+title: "Report template"
+author: "Your Name Here"
+date: "September 16, 2025"
+format: pdf
+editor: visual
+output:
+  html_document:
+    toc: no
+    df_print: paged
+---
+
+```{r}
+#| eval: true
+#| include: false
+
+# Set outputs for rendering
+knitr::opts_chunk$set(
+  echo = FALSE, message = FALSE, warning = FALSE
+)
+
+# DO NOT CHANGE
+```
+
+```{r}
+# WHAT YOU NEED TO CHANGE
+start_date <- '9-1-2024'
+end_date <- '9-1-2025'
+```
+
+```{r}
+# Housekeeping
+# Load libraries 
+library(foodrescue)
+library(dplyr)
+library(kableExtra)
+library(ggplot2)
+
+
+# Load data
+data(raw_food)
+
+# Clean data
+df <- clean_food(raw_food)
+clean_data <- df[['clean_data']]
+tidy_data <- df[['tidy_data']]
+
+# All dining halls
+dining_halls <- c("Campus Center Cafe", "Chase Duckett", "Compass", "Comstock", "Haynes", "King Scales", "Lamont", "Northrop Gillett", "Tyler", "Other", "Catering", "Cutter Ziskind")
+```
+
+# Introduction
+
+Write your introduction here.
+
+### Summary statistics
+
+```{r}
+weekly_stats(clean_data, tidy_data, start_date, end_date, dining_halls) |> row_spec(0, background = "#48D1CC", color = "black")
+```
+
+# Table Summaries
+
+### Total Food Recovered
+
+Written analysis goes here.
+
+```{r}
+recovery_tables(tidy_data, start_date, end_date, dining_halls, "total")
+```
+
+### Recovery by food type
+
+Written analysis goes here.
+
+```{r}
+recovery_tables(tidy_data, start_date, end_date, dining_halls, "type")
+```
+
+### Recovery by dining hall
+
+Written analysis goes here.
+
+```{r}
+recovery_tables(tidy_data, start_date, end_date, dining_halls, "hall")
+```
+
+### Top 25 recovered foods (by dining hall and type)
+
+Written analysis goes here.
+
+```{r}
+recovery_tables(tidy_data, start_date, end_date, dining_halls, "top")
+```
+
+# Recovery Distributions
+
+Discuss recovery distributions here.
+
+```{r}
+plot_recovery(tidy_data, start_date, end_date, dining_halls, fill = TRUE)
+```
+
+```{r}
+for (i in dining_halls) {
+  print(plot_recovery(tidy_data, start_date, end_date, i) + 
+    labs(title = paste0(i, " Recovery Distribution")) +
+    theme(axis.text.x = element_text(angle = 45, hjust = 1)))
+  
+}
+```
+
+# Limitations
+
+Discuss limitations of this analysis here.
