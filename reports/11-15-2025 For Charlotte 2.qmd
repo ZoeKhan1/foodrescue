@@ -44,7 +44,7 @@ raw_food2 <- read.csv("C:/Users/anabe/OneDrive/Documents/FRN Data/foodrescue/dat
 colnames(raw_food2)[colnames(raw_food2) == "Duration..in.seconds."] <- "Duration (in seconds)"
 
 # Clean data
-df <- clean_food(raw_food2)
+df <- clean_food2(raw_food2)
 
 clean_data <- df[['clean_data']]
 tidy_data <- df[['tidy_data']]
