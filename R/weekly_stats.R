@@ -28,17 +28,17 @@ weekly_stats <- function(clean_data, tidy_data, start, end, location) {
   tidy_filtered <- tidy_data |>
     filter(date >= mdy(start)) |>
     filter(date <= mdy(end)) |>
-    filter(dining_hall %in% location)
+    filter(.data$dining_hall %in% location)
 
   clean_filtered <- clean_data |>
     filter(date >= mdy(start)) |>
     filter(date <= mdy(end)) |>
-    filter(dining_hall %in% location)
+    filter(.data$dining_hall %in% location)
 
   # Getting number of containers
   containers <- clean_filtered |>
-    filter(dining_hall != "Campus Center Cafe") |>
-    filter(dining_hall != "Compass Cafe") |>
+    filter(.data$dining_hall != "Campus Center Cafe") |>
+    filter(.data$dining_hall != "Compass Cafe") |>
     summarize(num_containers = sum(containers, na.rm = TRUE))
 
   # Getting number of pick-ups
