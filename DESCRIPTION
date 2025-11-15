@@ -19,7 +19,8 @@ Imports:
     ggplot2,
     plotly,
     rlang,
-    kableExtra
+    kableExtra,
+    janitor
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)

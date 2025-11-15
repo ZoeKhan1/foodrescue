@@ -24,7 +24,6 @@ Function to make interactive plot
 \examples{
 \dontrun{
 # Get data
-data("raw_food")
 df <- clean_food(raw_food)
 tidy_data <- df[['tidy_data']]
 
