@@ -40,6 +40,9 @@ library(ggplot2)
 # Load data
 raw_food2 <- read.csv("C:/Users/anabe/OneDrive/Documents/FRN Data/foodrescue/data-raw/FRN Collection Form 9-21-2025 to 11-14-2025 clean.csv")
 
+# column name didn't load correctly, had to fix that
+colnames(raw_food2)[colnames(raw_food2) == "Duration..in.seconds."] <- "Duration (in seconds)"
+
 # Clean data
 df <- clean_food(raw_food2)
 
