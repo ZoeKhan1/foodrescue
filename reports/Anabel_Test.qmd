@@ -12,20 +12,22 @@ library(foodrescue)
 data("raw_food")
 ```
 
-Fall 2024: 4480.9 lb
-19 shifts per week
+Fall 2024: 4480.9 lb 19 shifts per week
+
 ```{r}
 4480.9/19
 ```
+
 235.8368 per shift slot for the semester
 
-Spring 2025: 2433.32 lb
-17 shifts per week
+Spring 2025: 2433.32 lb 17 shifts per week
+
 ```{r}
 235.8368*17
 
 235.8368*2
 ```
+
 If we kept up at the same rate with a different number of shifts, we would have collected 4009.226 lb
 
 471.6736 lb can be attributed to fewer shifts
@@ -33,5 +35,3 @@ If we kept up at the same rate with a different number of shifts, we would have 
 ```{r}
 4480.9 - 2903.117- 471.6736
 ```
-
-
