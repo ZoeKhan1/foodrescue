@@ -1,0 +1,15 @@
+---
+title: "11-15-2025"
+author: "Anabel Fletcher"
+format: html
+editor: visual
+---
+
+```{r}
+library(foodrescue)
+library(readr)
+
+raw_food <- read.csv("C:/Users/anabe/OneDrive/Documents/FRN Data/foodrescue/data-raw/FRN Collection Form 9-21-2025 to 11-14-2025 clean.csv")
+View(raw_food)
+```
+
