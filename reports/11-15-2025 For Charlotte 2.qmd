@@ -25,7 +25,7 @@ knitr::opts_chunk$set(
 ```{r}
 # WHAT YOU NEED TO CHANGE
 start_date <- '9-1-2025'
-end_date <- '11-14-2025'
+end_date <- '12-6-2025'
 ```
 
 ```{r}
@@ -58,7 +58,6 @@ head(clean_data)
 summary(tidy_data)
 View(tidy_data)
 ```
-
 
 # Introduction
 
