@@ -46,7 +46,7 @@ clean_data <- df[['clean_data']]
 tidy_data <- df[['tidy_data']]
 
 # All dining halls
-dining_halls <- c("Campus Center Cafe", "Chase Duckett", "Compass", "Comstock", "Haynes", "King Scales", "Lamont", "Northrop Gillett", "Tyler", "Other", "Catering", "Cutter Ziskind")
+dining_halls <- c("Campus Center Cafe", "Chase Duckett", "Compass Cafe", "Comstock", "Haynes", "King Scales", "Lamont", "Northrop Gillett", "Tyler", "Other", "Catering", "Cutter Ziskind")
 ```
 
 # Introduction
