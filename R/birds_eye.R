@@ -8,12 +8,12 @@
 #' @importFrom dplyr filter
 #' @importFrom ggplot2 ggplot theme_bw geom_point theme labs aes
 #' @importFrom plotly ggplotly
+#' @importFrom rlang .data
 #' @export
 #'
 #' @examples
 #' \dontrun{
 #' # Get data
-#' data("raw_food")
 #' df <- clean_food(raw_food)
 #' tidy_data <- df[['tidy_data']]
 #'
@@ -24,11 +24,11 @@ birds_eye <- function(tidy_data, start, end, location) {
   tidy_data <- tidy_data |>
     filter(date >= mdy(start)) |>
     filter(date <= mdy(end)) |>
-    filter(dining_hall %in% location) |>
-    filter(weight > 0)
+    filter(.data$dining_hall %in% location) |>
+    filter(.data$weight > 0)
 
-  plot <- ggplot(tidy_data, aes(date, weight,
-                                text = paste0(dining_hall, "<br>", weight, " lbs"))) +
+  plot <- ggplot(tidy_data, aes(date, .data$weight,
+                                text = paste0(.data$dining_hall, "<br>", .data$weight, " lbs"))) +
     geom_point() +
     theme_bw() +
     theme(panel.grid = element_blank()) +

@@ -16,7 +16,6 @@
 #'
 #' @examples
 #' \dontrun{
-#' data("raw_food")
 #' cooked_food <- clean_food(raw_food)
 #' }
 clean_food <- function(data) {

@@ -5,7 +5,7 @@ Version: 0.0.1
 Author: person("Zoe", "Khan", email = "zkhan@smith.edu", role = c("aut", "cre"))
 Maintainer: The package maintainer <yourself@somewhere.net>
 Description: This package houses functions that clean and plot food rescue network data.
-License: GPL-3 + file LICENSE
+License: GPL-3
 Depends:
     R (>= 4.0.0)
 Imports:
@@ -19,7 +19,8 @@ Imports:
     ggplot2,
     plotly,
     rlang,
-    kableExtra
+    kableExtra,
+    janitor
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)

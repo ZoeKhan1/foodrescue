@@ -10,6 +10,7 @@
 #' @importFrom dplyr filter mutate desc
 #' @importFrom forcats fct_reorder fct_rev
 #' @importFrom ggplot2 ggplot aes labs geom_col scale_fill_viridis_d theme_bw theme element_blank element_text
+#' @importFrom rlang .data
 #' @export
 #'
 #' @examples
@@ -27,21 +28,21 @@ plot_recovery <- function(tidy_data, start, end, location, fill = FALSE) {
   tidy_data <- tidy_data |>
     filter(date >= mdy(start)) |>
     filter(date <= mdy(end)) |>
-    filter(dining_hall %in% location) |>
-    filter(!is.na(weight)) |>
-    mutate(dining_hall = fct_reorder(dining_hall, desc(weight), .fun = sum, .na_rm = TRUE)) |>
-    mutate(type = fct_reorder(type, weight, .fun = sum, .desc = FALSE, .na_rm = TRUE))
+    filter(.data$dining_hall %in% location) |>
+    filter(!is.na(.data$weight)) |>
+    mutate(dining_hall = fct_reorder(.data$dining_hall, desc(.data$weight), .fun = sum, .na_rm = TRUE)) |>
+    mutate(type = fct_reorder(.data$type, .data$weight, .fun = sum, .desc = FALSE, .na_rm = TRUE))
 
   if (length(location) != 1) {
     if (fill == TRUE) {
       graph <- tidy_data |>
-        ggplot(aes(dining_hall, y = weight, fill = type)) +
+        ggplot(aes(.data$dining_hall, y = .data$weight, fill = .data$type)) +
         geom_col() +
         scale_fill_viridis_d(option = "H", name = "Food type")
 
     } else if (fill == FALSE) {
       graph <- tidy_data |>
-        ggplot(aes(dining_hall, y = weight)) +
+        ggplot(aes(.data$dining_hall, y = .data$weight)) +
         geom_col()
     }
     graph <- graph +
@@ -53,7 +54,7 @@ plot_recovery <- function(tidy_data, start, end, location, fill = FALSE) {
     return(graph)
   } else if (length(location) == 1) {
     graph <- tidy_data |>
-      ggplot(aes(x = fct_rev(type), y = weight)) +
+      ggplot(aes(x = fct_rev(.data$type), y = .data$weight)) +
       geom_col() +
       labs(x = "Food type", y = "Weight (lbs)") +
       theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
