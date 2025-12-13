@@ -41,7 +41,7 @@ library(ggplot2)
 data(raw_food)
 
 # Clean data
-df <- clean_food(raw_food)
+df <- clean_food2(raw_food)
 clean_data <- df[['clean_data']]
 tidy_data <- df[['tidy_data']]
 

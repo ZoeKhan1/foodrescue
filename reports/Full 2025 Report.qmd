@@ -8,6 +8,9 @@ output:
   html_document:
     toc: no
     df_print: paged
+header-includes:
+  - \usepackage{caption}
+  - \usepackage{subcaption}
 ---
 
 ```{r}
@@ -25,10 +28,10 @@ knitr::opts_chunk$set(
 ```{r}
 # WHAT YOU NEED TO CHANGE
 start_date_spring <- '1-1-2025'
-end_date_spring <- '3-1-2025'
+end_date_spring <- '7-11-2025'
 
-start_date_fall <- '3-2-2025'
-end_date_fall <- '6-1-2025'
+start_date_fall <- '9-20-2025'
+end_date_fall <- '12-12-2025'
 ```
 
 ```{r}
@@ -44,7 +47,7 @@ library(ggplot2)
 data(raw_food)
 
 # Clean data
-df <- clean_food(raw_food)
+df <- clean_food2(raw_food)
 clean_data <- df[['clean_data']]
 tidy_data <- df[['tidy_data']]
 
@@ -59,14 +62,24 @@ Write your introduction here.
 ### Summary statistics
 
 ```{r}
-weekly_stats(clean_data, tidy_data, start_date_spring, end_date_spring, dining_halls) |> row_spec(0, background = "#48D1CC", color = "black")
+weekly_stats_spring = weekly_stats(clean_data, tidy_data, start_date_spring, end_date_spring, dining_halls)# |> row_spec(0, background = "#48D1CC", color = "black")
 ```
 
 ```{r}
-weekly_stats(clean_data, tidy_data, start_date_fall, end_date_fall, dining_halls) |> row_spec(0, background = "#48D1CC", color = "black")
+weekly_stats_fall = weekly_stats(clean_data, tidy_data, start_date_fall, end_date_fall, dining_halls)# |> row_spec(0, background = "#48D1CC", color = "black")
 ```
 
-`{"#48D1CC", color = "black")}`
+```{r}
+#| layout-ncol: 2 
+#| tbl-cap: "Weekly Statistics"
+#| tbl-subcap: ["Spring 2025", "Fall 2025"]
+library(knitr)
+# Table on the left
+kable(weekly_stats_spring) 
+# Table on the right
+kable(weekly_stats_fall)
+```
+
 
 # Table Summaries
 
