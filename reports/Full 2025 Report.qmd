@@ -41,7 +41,8 @@ library(foodrescue)
 library(dplyr)
 library(kableExtra)
 library(ggplot2)
-
+library(lubridate)
+library(patchwork)
 
 # Load data
 data(raw_food)
@@ -79,7 +80,6 @@ kable(weekly_stats_spring)
 # Table on the right
 kable(weekly_stats_fall)
 ```
-
 
 # Table Summaries
 
@@ -144,21 +144,69 @@ plot_recovery(tidy_data, start_date_fall, end_date_fall, dining_halls, fill = TR
 ```
 
 ```{r}
-for (i in dining_halls) {
-  print(plot_recovery(tidy_data, start_date_spring, end_date_spring, i) + 
-    labs(title = paste0(i, " Recovery Distribution")) +
-    theme(axis.text.x = element_text(angle = 45, hjust = 1)))
-  
-}
+# for (i in dining_halls) {
+#   print(plot_recovery(tidy_data, start_date_spring, end_date_spring, i) + 
+#     labs(title = paste0(i, " Recovery Distribution")) +
+#     theme(axis.text.x = element_text(angle = 45, hjust = 1)))
+#   
+# }
 ```
 
 ```{r}
-for (i in dining_halls) {
-  print(plot_recovery(tidy_data, start_date_fall, end_date_fall, i) + 
-    labs(title = paste0(i, " Recovery Distribution")) +
-    theme(axis.text.x = element_text(angle = 45, hjust = 1)))
+# for (i in dining_halls) {
+#   print(plot_recovery(tidy_data, start_date_fall, end_date_fall, i) + 
+#     labs(title = paste0(i, " Recovery Distribution")) +
+#     theme(axis.text.x = element_text(angle = 45, hjust = 1)))
+#   
+# }
+```
+
+
+```{r}
+# Initialize start and end dates
+starts <- mdy(c('1-1-2025', '9-1-2025'))
+ends <- mdy(c('7-11-2025', '12-12-2025'))
+semester <- c("Spring", "Fall")
+tidy_data <- tidy_data |>
+  mutate(semester = case_when(
+    date >= mdy("1-1-2025") & date <= mdy("7-11-2025") ~ "Spring",
+    date >= mdy("9-1-2025") & date <= mdy("12-12-2025") ~ "Fall",
+    TRUE ~ NA
+  ))
+
+# Looping through each dining hall each semester and printing patchwork graphs
+for (hall in dining_halls) {
   
+  z <- tidy_data |>
+    filter(date >= starts[1]) |>
+    filter(date <= ends[2]) |>
+    filter(dining_hall == hall) |>
+    filter(!is.na(.data$weight)) |>
+    group_by(type, semester) |>
+    summarize(sum = sum(weight))
+  ymax <- max(z$sum, na.rm = TRUE)  # Ensures y-axis is static across semesters
+  
+  plots <- vector("list", length(starts))  # Initializing list for the two plots in each row
+  
+  for (i in seq_along(starts)) {
+    hall_data <- tidy_data |>
+      filter(date >= starts[i]) |>
+      filter(date <= ends[i]) |>
+      filter(dining_hall == hall) |>
+      filter(!is.na(.data$weight))  # Subsetting data
+
+    plots[[i]] <- ggplot(hall_data, aes(x = type, y = weight)) +
+      geom_col() +
+      scale_y_continuous(limits = c(0, ymax)) +
+      labs(title = paste0(hall, " ", semester[i])) +
+      theme_bw() +
+      theme(axis.text.x = element_text(angle = 45, hjust = 1)) # Creating graph
+      
+  }
+  combined <- wrap_plots(plots, ncol = length(plots)) # Patchwork combinationss
+  print(combined)
 }
+
 ```
 
 # Limitations
