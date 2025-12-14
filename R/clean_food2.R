@@ -113,7 +113,7 @@ clean_food2 <- function(data) {
   # Subtract 2 lbs starting January 1st, 2025
   tidy_data <- tidy_data |>
     mutate(weight = if_else(
-      date >= mdy('01-01-2025') & !.data$dining_hall %in% c("Campus Center Cafe", "Compass Cafe"),
+      date >= mdy('01-01-2025') & !.data$dining_hall %in% c("Campus Center Cafe", "Compass Cafe", "Catering"),
       .data$weight - 2,
       .data$weight
     )) |>
