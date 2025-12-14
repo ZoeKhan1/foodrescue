@@ -58,7 +58,9 @@ dining_halls <- c("Campus Center Cafe", "Chase Duckett", "Compass", "Comstock", 
 
 # Introduction
 
-Write your introduction here.
+The Food Rescue Network saw substantial growth in 2025 thanks to the efforts of our volunteers, Manna associates, and dining hall staff. This year, we went from rescuing 340 containers of food over the course of 103 pickups in the Spring to rescuing 514 containers of food over the course of 145 pickups in the Fall. Thank you to everyone who made this possible! 
+
+In total, 2455 lbs of food were rescued in the Spring and 3709 lbs of food were rescued in the Fall, a 51% increase from Spring semester.
 
 ### Summary statistics
 
