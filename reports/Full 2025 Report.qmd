@@ -62,23 +62,17 @@ Write your introduction here.
 
 ### Summary statistics
 
-```{r}
-weekly_stats_spring = weekly_stats(clean_data, tidy_data, start_date_spring, end_date_spring, dining_halls)# |> row_spec(0, background = "#48D1CC", color = "black")
-```
+#### Spring 2025
 
 ```{r}
-weekly_stats_fall = weekly_stats(clean_data, tidy_data, start_date_fall, end_date_fall, dining_halls)# |> row_spec(0, background = "#48D1CC", color = "black")
+library(kableExtra)
+weekly_stats(clean_data, tidy_data, start_date_spring, end_date_spring, dining_halls) |> row_spec(0, background = "#48D1CC", color = "black")
 ```
 
+#### Fall 2025
 ```{r}
-#| layout-ncol: 2 
-#| tbl-cap: "Weekly Statistics"
-#| tbl-subcap: ["Spring 2025", "Fall 2025"]
-library(knitr)
-# Table on the left
-kable(weekly_stats_spring) 
-# Table on the right
-kable(weekly_stats_fall)
+weekly_stats(clean_data, tidy_data, start_date_fall, end_date_fall, dining_halls) |> row_spec(0, background = "#48D1CC", color = "black")
+
 ```
 
 # Table Summaries
@@ -87,10 +81,12 @@ kable(weekly_stats_fall)
 
 Written analysis goes here.
 
+#### Spring 2025
 ```{r}
 recovery_tables(tidy_data, start_date_spring, end_date_spring, dining_halls, "total")
 ```
 
+#### Fall 2025
 ```{r}
 recovery_tables(tidy_data, start_date_fall, end_date_fall, dining_halls, "total")
 ```
@@ -99,10 +95,12 @@ recovery_tables(tidy_data, start_date_fall, end_date_fall, dining_halls, "total"
 
 Written analysis goes here.
 
+#### Spring 2025
 ```{r}
 recovery_tables(tidy_data, start_date_spring, end_date_spring, dining_halls, "type")
 ```
 
+#### Fall 2025
 ```{r}
 recovery_tables(tidy_data, start_date_fall, end_date_fall, dining_halls, "type")
 ```
@@ -111,10 +109,12 @@ recovery_tables(tidy_data, start_date_fall, end_date_fall, dining_halls, "type")
 
 Written analysis goes here.
 
+#### Spring 2025
 ```{r}
 recovery_tables(tidy_data, start_date_spring, end_date_spring, dining_halls, "hall")
 ```
 
+#### Fall 2025
 ```{r}
 recovery_tables(tidy_data, start_date_fall, end_date_fall, dining_halls, "hall")
 ```
@@ -123,10 +123,12 @@ recovery_tables(tidy_data, start_date_fall, end_date_fall, dining_halls, "hall")
 
 Written analysis goes here.
 
+#### Spring 2025
 ```{r}
 recovery_tables(tidy_data, start_date_spring, end_date_spring, dining_halls, "top")
 ```
 
+#### Fall 2025
 ```{r}
 recovery_tables(tidy_data, start_date_fall, end_date_fall, dining_halls, "top")
 ```
@@ -160,7 +162,6 @@ plot_recovery(tidy_data, start_date_fall, end_date_fall, dining_halls, fill = TR
 #   
 # }
 ```
-
 
 ```{r}
 # Initialize start and end dates
