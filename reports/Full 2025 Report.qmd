@@ -1,7 +1,7 @@
 ---
-title: "Spring 2025 Report"
-author: "Your Name Here"
-date: "October 9, 2025"
+title: "Spring and Fall 2025 Report"
+author: "Anabel Fletcher, Zoe Khan, Julia Twomey"
+date: "December 14, 2025"
 format: pdf
 editor: visual
 output:
@@ -53,14 +53,14 @@ clean_data <- df[['clean_data']]
 tidy_data <- df[['tidy_data']]
 
 # All dining halls
-dining_halls <- c("Campus Center Cafe", "Chase Duckett", "Compass", "Comstock", "Haynes", "King Scales", "Lamont", "Northrop Gillett", "Tyler", "Other", "Catering", "Cutter Ziskind")
+dining_halls <- c("Campus Center Cafe", "Chase Duckett", "Compass Cafe", "Comstock", "King Scales", "Lamont", "Northrop Gillett", "Tyler", "Catering", "Cutter Ziskind")
 ```
 
 # Introduction
 
-The Food Rescue Network saw substantial growth in 2025 thanks to the efforts of our volunteers, Manna associates, and dining hall staff. This year, we went from rescuing 340 containers of food over the course of 103 pickups in the Spring to rescuing 514 containers of food over the course of 145 pickups in the Fall. Thank you to everyone who made this possible! 
+The Food Rescue Network saw substantial growth in 2025 thanks to the efforts of our volunteers, Manna associates, and dining hall staff. This year, we went from rescuing 340+ containers of food over the course of 150 pickups in the Spring to rescuing 514+ containers of food over the course of 182 pickups in the Fall. Thank you to everyone who made this possible!
 
-In total, 2455 lbs of food were rescued in the Spring and 3709 lbs of food were rescued in the Fall, a 51% increase from Spring semester.
+In total, 2925 lbs of food were rescued in the Spring and 4085 lbs of food were rescued in the Fall, a 40% increase from Spring semester.
 
 ### Summary statistics
 
@@ -79,23 +79,9 @@ weekly_stats(clean_data, tidy_data, start_date_fall, end_date_fall, dining_halls
 
 # Table Summaries
 
-### Total Food Recovered
-
-Written analysis goes here.
-
-#### Spring 2025
-```{r}
-recovery_tables(tidy_data, start_date_spring, end_date_spring, dining_halls, "total")
-```
-
-#### Fall 2025
-```{r}
-recovery_tables(tidy_data, start_date_fall, end_date_fall, dining_halls, "total")
-```
-
 ### Recovery by food type
 
-Written analysis goes here.
+One of the top recovered food in both semesters was chicken, with 451lbs in the Spring and 1001lbs in the Fall. The other was mixed, meaning that it doesn't fit cleanly into one of our set categories. The 3rd most recovered food in the Spring was rice at 372lbs, ranking 4th in the Fall at 472lbs. Other food types high up in the rankings in both semesters include vegetables, beans, and beef.
 
 #### Spring 2025
 ```{r}
@@ -109,7 +95,10 @@ recovery_tables(tidy_data, start_date_fall, end_date_fall, dining_halls, "type")
 
 ### Recovery by dining hall
 
-Written analysis goes here.
+The top four dining halls remained mostly the same over the two semesters, though the order shifted. In the Spring, Northrop Gillett was the dining hall with the highest recovery, weighing in at 761.4 lbs. In the Fall, Tyler took place over other dining halls with a total of 901.9 lbs rescued. 
+With the exception of Northrop Gillett, Comstock, the Compass cafe, and the Campus Center Cafe, all other dining halls saw an increase in recovered food in the Fall semester.
+
+One notable difference accounting for some of the variation between Spring and Fall is that Food Rescue only began recovering food from Lamont in the Fall, which was absent from Spring data.
 
 #### Spring 2025
 ```{r}
@@ -123,7 +112,7 @@ recovery_tables(tidy_data, start_date_fall, end_date_fall, dining_halls, "hall")
 
 ### Top 25 recovered foods (by dining hall and type)
 
-Written analysis goes here.
+In the Spring and the Fall, the top recovered item was mixed from the Compass Cafe (388lbs in the Spring, 359.2 in the Fall). Chicken recovery made up for 3 out of the top ten top recovered items in the Fall, and meat in general made up 5 out of the top ten. 
 
 #### Spring 2025
 ```{r}
@@ -137,14 +126,18 @@ recovery_tables(tidy_data, start_date_fall, end_date_fall, dining_halls, "top")
 
 # Recovery Distributions
 
-Discuss recovery distributions here.
+Below are visualizations of the recovery distributions by dining hall (first two graphs) and then a breakdown of recovery distributions by food type for each dining hall each semester.
 
+Note that any empty graphs reflect zero food recovered from a given dining hall. If the Campus Center Recovery Distribution graph looks confusing, that is due to all food recovered from the Campus Center falling into the “mixed” category.
+
+#### Spring 2025
 ```{r}
-plot_recovery(tidy_data, start_date_spring, end_date_spring, dining_halls, fill = TRUE)
+plot_recovery(tidy_data, start_date_spring, end_date_spring, dining_halls)
 ```
 
+#### Fall 2025
 ```{r}
-plot_recovery(tidy_data, start_date_fall, end_date_fall, dining_halls, fill = TRUE)
+plot_recovery(tidy_data, start_date_fall, end_date_fall, dining_halls)
 ```
 
 ```{r}
@@ -214,4 +207,8 @@ for (hall in dining_halls) {
 
 # Limitations
 
-Discuss limitations of this analysis here.
+This data and analysis is purely observational and may not capture all nuances about food waste and recovery at Smith. For example, in Spring 2025 our organization was not operating at full capacity due to limited availability of driver volunteers. The decrease in total recovery from that semester thus is influenced not only by dining policy and menu decisions, but by details of our own operations.
+
+When we list Comstock as a dining hall, we assume that any food from Haynes is included.
+
+Additionally, our code is programmed to automatically subtract two pounds from our volunteer inputs to account for the weight of a standard clear container. There is a risk of overestimation when volunteers weigh multiple containers simultaneously, as the code only anticipates one container. Similarly, dining halls occasionally donate food in lighter, disposable containers which would result in records being underestimated. Finally, records of lighter foods such as bread may be lost in the data when container weight is subtracted. Although it is unrealistic to capture perfectly accurate data, we can mitigate some of these errors by encouraging caution among volunteers when weighing in bulk and when weighing lighter containers.
