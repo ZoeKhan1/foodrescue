@@ -55,8 +55,8 @@ weekly_stats <- function(clean_data, tidy_data, start, end, location) {
     Weight = weight,
     Containers = containers,
     Pickups = pickups
-  ) |>
-    kable(col.names = c("Weight", "Containers", "Pick-ups"))
+  ) #|>
+    #kable(col.names = c("Weight (lbs)", "Containers", "Pick-ups"))
 
   return(stats)
 }

@@ -37,29 +37,29 @@ recovery_tables <- function(tidy_data, start, end, location, option = c("total",
   if (option == "total") {
     table <- tidy_data |>
       summarize(total_weight = round(sum(.data$weight, na.rm = TRUE), 1)) |>
-      arrange(desc(.data$total_weight)) |>
-      kable(col.names = c("Total Weight (lbs)"))
+      arrange(desc(.data$total_weight)) #|>
+      #kable(col.names = c("Total Weight (lbs)"))
   } else if (option == "type") {
     table <- tidy_data |>
       group_by(.data$type) |>
       summarize(weight = round(sum(.data$weight, na.rm = TRUE), 1)) |>
-      arrange(desc(.data$weight)) |>
-      kable(col.names = c("Type", "Weight (lbs)"))
+      arrange(desc(.data$weight)) #|>
+      #kable(col.names = c("Type", "Weight (lbs)"))
   } else if (option == "hall") {
     table <- tidy_data |>
       group_by(.data$dining_hall) |>
       summarize(weight = round(sum(.data$weight, na.rm = TRUE), 1)) |>
-      arrange(desc(.data$weight)) |>
-      kable(col.names = c("Dining Hall", "Weight (lbs)"))
+      arrange(desc(.data$weight)) #|>
+      #kable(col.names = c("Dining Hall", "Weight (lbs)"))
   } else if (option == "top") {
     table <- tidy_data |>
       group_by(.data$dining_hall, .data$type) |>
       summarize(weight = round(sum(.data$weight, na.rm = TRUE), 1)) |>
       arrange(desc(.data$weight)) |>
-      head(25) |>
-      kable(col.names = c("Dining Hall", "Type", "Weight (lbs)"))
+      head(25) #|>
+      #kable(col.names = c("Dining Hall", "Type", "Weight (lbs)"))
   }
 
-  table <- table |> row_spec(0, background = "#48D1CC", color = "black")
+  #table <- table |> row_spec(0, background = "#48D1CC", color = "black")
   return(table)
 }
