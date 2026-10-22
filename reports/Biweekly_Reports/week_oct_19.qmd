@@ -1,0 +1,93 @@
+---
+title: "Biweekly Report - Week of Oct 19"
+author: "Reagan Gonzales, Zoe Khan, Doraliz Perez"
+format: 
+  pdf:
+    toc: false
+    df-print: paged
+editor: visual
+header-includes:
+  - \usepackage{caption}
+  - \usepackage{subcaption}
+---
+
+```{r include=FALSE}
+library(tidyverse)
+df <- readr::read_csv("/Users/reagangonzales/Documents/foodrescue/data-raw/Corrected_FRN_Collection_Form_Sep_30-Oct_19_2026.csv")
+library(foodrescue)
+```
+
+```{r include=FALSE}
+clean_df <- clean_food2(df)
+```
+
+```{r include=FALSE}
+clean_data <- clean_df[['clean_data']]
+tidy_data <- clean_df[['tidy_data']]
+```
+
+This is The Smith College Food Rescue Network's biweekly report for the week of October 19th. "Last 2 weeks" is defined as dates between October 5th to October 17th. Data was pulled in October 19th.
+
+# Lbs of food rescued last 2 weeks
+
+```{r}
+tidy_data |>
+  filter(date >= '2026-10-05') |>
+  pull(weight) |> 
+  sum(na.rm = TRUE)
+```
+
+663.85 Ibs of food
+
+# Total lbs of food rescued so far this semester 
+
+```{r}
+sum(tidy_data$weight)
+```
+
+1005.29 Ibs so far
+
+# Pans collected the last 2 weeks
+
+```{r}
+clean_data |>
+  filter(date >= '2026-10-05') |>
+  # calculate containers sums
+  summarize(total_pans = sum(containers))
+```
+
+119 pans collected last 2 weeks
+
+# Total pans collected so far this semester 
+
+```{r}
+clean_data |>
+  # calculate containers sums
+  summarize(total_pans = sum(containers))
+```
+
+155 pans collected so far this semester
+
+# Most collected food/category last 2 weeks 
+
+```{r}
+tidy_data |>
+  filter(date >= '2026-10-05') |>
+  group_by(type) |>
+  summarise(total_weight = sum(weight, na.rm = TRUE)) |>
+  arrange(desc(total_weight))
+```
+
+Most collected food last 2 weeks: Chicken 168 Ibs
+
+# Summary
+
+- 663.85 Ibs of food rescued last 2 weeks
+
+- 1005.29 Ibs of food rescued so far this semester
+
+- 119 pans collected last 2 weeks
+
+- 155 pans collected so far this semester
+
+- Chicken (168 Ibs) most collected food category last 2 weeks
