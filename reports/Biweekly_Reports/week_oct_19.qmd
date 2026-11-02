@@ -49,24 +49,30 @@ sum(tidy_data$weight)
 
 # Pans collected the last 2 weeks
 
+We don't include compass cafe and campus center cafe containers because they don't use the standard containers that the other dining halls use
+
 ```{r}
 clean_data |>
   filter(date >= '2026-10-05') |>
+  filter(!dining_hall %in% c("Compass Cafe", "Campus Center Cafe")) |>
   # calculate containers sums
   summarize(total_pans = sum(containers))
 ```
 
-119 pans collected last 2 weeks
+78 pans collected last 2 weeks
 
 # Total pans collected so far this semester 
 
+Ex
+
 ```{r}
 clean_data |>
+  filter(!dining_hall %in% c("Compass Cafe", "Campus Center Cafe")) |>
   # calculate containers sums
   summarize(total_pans = sum(containers))
 ```
 
-155 pans collected so far this semester
+114 pans collected so far this semester
 
 # Most collected food/category last 2 weeks 
 
@@ -86,8 +92,8 @@ Most collected food last 2 weeks: Chicken 168 Ibs
 
 - 1005.29 Ibs of food rescued so far this semester
 
-- 119 pans collected last 2 weeks
+- 78 pans collected last 2 weeks
 
-- 155 pans collected so far this semester
+- 114 pans collected so far this semester
 
 - Chicken (168 Ibs) most collected food category last 2 weeks
