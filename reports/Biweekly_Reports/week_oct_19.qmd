@@ -63,7 +63,7 @@ clean_data |>
 
 # Total pans collected so far this semester 
 
-Ex
+Excluding campus cafe and compass cafe.
 
 ```{r}
 clean_data |>
