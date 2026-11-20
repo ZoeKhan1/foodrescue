@@ -26,7 +26,19 @@ clean_data <- clean_df[['clean_data']]
 tidy_data <- clean_df[['tidy_data']]
 ```
 
-This is The Smith College Food Rescue Network's biweekly report for the week of October 19th. "Last 2 weeks" is defined as dates between October 5th to October 17th. Data was pulled in October 19th.
+This is The Smith College Food Rescue Network's biweekly report for the week of November 19th. "Last 2 weeks" is defined as dates between November 5th to November 17th. Data was pulled in November 19th.
+
+# Summary
+
+- 559.01 Ibs of food rescued last 2 weeks
+
+- 2455 Ibs of food rescued so far this semester
+
+- 88 pans collected last 2 weeks
+
+- 312 pans collected so far this semester
+
+- Beef(135 Ibs) most collected food category last 2 weeks
 
 # Lbs of food rescued last 2 weeks
 
@@ -85,15 +97,3 @@ tidy_data |>
 ```
 
 Most collected food last 2 weeks: Beef 135 Ibs
-
-# Summary
-
-- 559.01 Ibs of food rescued last 2 weeks
-
-- 2455 Ibs of food rescued so far this semester
-
-- 88 pans collected last 2 weeks
-
-- 312 pans collected so far this semester
-
-- Beef(135 Ibs) most collected food category last 2 weeks
